@@ -57,10 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         TextView editTextPassword = (TextView)  findViewById(R.id.password);
         String password = editTextPassword.getText().toString();
 
-        WerewolfInterface service = WerewolfService.CreateWerewolfService();
+        WerewolfService service = new WerewolfService();
+        WerewolfInterface wereInterface = service.CreateWerewolfService();
         LoginCall body = new LoginCall(emailAddress, password);
 
-        Call<LoginDetails> call = service.login(body);
+        Call<LoginDetails> call = wereInterface.login(body);
 
         final LoginDetails[] loginDetails = new LoginDetails[1];
         call.enqueue(new Callback<LoginDetails>() {
@@ -80,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void checkToken() throws Exception {
         if (TokenHelper.IsTokenValid(getSharedPreferences(LOCAL_STORAGE, 0))) return;

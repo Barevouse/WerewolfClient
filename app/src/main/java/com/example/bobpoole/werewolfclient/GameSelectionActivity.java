@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Bob.Poole on 28/11/2016.
  */
@@ -22,14 +26,30 @@ public class GameSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_select);
 
+        WerewolfService service = new WerewolfService();
+        WerewolfInterface wereInterface = service.CreateWerewolfService();
+
+        wereInterface.getGames().enqueue(new Callback<GameList>() {
+            @Override
+            public void onResponse(Call<GameList> call, Response<GameList> response) {
+                if(response.isSuccessful()){
+                    onGamesSuccess(response.body());
+                }
+                else{
+                    //TODO: Add in error handling
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GameList> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void onGamesSuccess(GameList gameList) {
         TextView textView = (TextView) findViewById(R.id.textView);
-
-        SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, 0);
-
-        String token = localStorage.getString("Token", "");
-
-        textView.setText(token);
-
-
+        textView.setText(gameList.Active.get(0));
     }
 }
