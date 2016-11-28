@@ -10,11 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bobpoole.werewolfclient.Models.LoginCall;
-import com.nimbusds.jose.*;
 import com.nimbusds.jwt.*;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.text.ParseException;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -58,12 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView editTextPassword = (TextView)  findViewById(R.id.password);
         String password = editTextPassword.getText().toString();
 
-        Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://werewolv.es/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-         WerewolfInterface service = retrofit.create(WerewolfInterface.class);
+        WerewolfInterface service = WerewolfService.CreateWerewolfService();
         LoginCall body = new LoginCall(emailAddress, password);
 
         Call<LoginDetails> call = service.login(body);
@@ -87,35 +81,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     private void checkToken() throws Exception {
-        SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, 0);
-        String token = localStorage.getString("Token", "");
-        Date now = new Date();
-
-        if(token.isEmpty() ){
-            return;
-        }
-
-        int i = token.lastIndexOf('.');
-        String withoutSignature = token.substring(0, i+1);
-
-        SignedJWT signedJWT = null;
-
-        try {
-            signedJWT = SignedJWT.parse(withoutSignature);
-        } catch (java.text.ParseException e) {
-            return;
-        }
-
-        JWTClaimsSet jwtClaimsSet = signedJWT.getJWTClaimsSet();
-
-        Date exp = jwtClaimsSet.getDateClaim("exp");
-
-        if(exp.before(now)){
-            return;
-        }
-
-
+        if (TokenHelper.IsTokenValid(getSharedPreferences(LOCAL_STORAGE, 0))) return;
         Intent intent = new Intent(getApplicationContext(), GameSelectionActivity.class);
         startActivity(intent);
     }
