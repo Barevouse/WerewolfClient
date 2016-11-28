@@ -11,51 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bobpoole.werewolfclient.LoginActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="15dp"
-        android:padding="5dp"
-        android:id="@+id/password"
-        android:layout_above="@+id/submitCredential"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/edittextstyle"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:hint="@string/password"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:layout_marginBottom="17dp"
-        android:padding="5dp"
-        android:id="@+id/emailAddress"
-        android:background="@drawable/edittextstyle"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey"
-        android:hint="@string/username"
-        android:layout_above="@+id/password"
-        android:layout_alignLeft="@+id/password"
-        android:layout_alignStart="@+id/password" />
-
-    <Button
-        android:text="@string/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:id="@+id/submitCredential"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="login"/>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,4 +19,60 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:contentDescription=""/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_marginTop="23dp"
+        android:padding="5dp"
+        android:id="@+id/password"
+        android:background="@drawable/edittextstyle"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:hint="@string/password"
+        android:layout_below="@+id/emailAddress"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:id="@+id/loginButton"
+        android:onClick="login"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Incorrect username or password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/error"
+        android:textColor="@color/error"
+        android:textSize="30dp"
+        android:background="@color/white"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:padding="5dp"
+        android:id="@+id/emailAddress"
+        android:background="@drawable/edittextstyle"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:hint="@string/username"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password" />
+
 </RelativeLayout>

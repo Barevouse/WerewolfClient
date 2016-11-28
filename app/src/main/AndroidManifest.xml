@@ -11,7 +11,14 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <uses-permission android:name="android.permission.INTERNET"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".GameSelectionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <uses-permission android:name="android.permission.INTERNET"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
