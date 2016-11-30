@@ -1,8 +1,10 @@
-package com.example.bobpoole.werewolfclient;
+package com.example.bobpoole.werewolfclient.MainGame;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.example.bobpoole.werewolfclient.R;
 
 /**
  * Created by Bob.Poole on 28/11/2016.

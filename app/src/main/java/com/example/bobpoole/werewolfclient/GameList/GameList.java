@@ -1,4 +1,4 @@
-package com.example.bobpoole.werewolfclient;
+package com.example.bobpoole.werewolfclient.GameList;
 
 import java.util.List;
 

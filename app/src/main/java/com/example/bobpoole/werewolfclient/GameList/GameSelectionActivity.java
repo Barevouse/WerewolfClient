@@ -1,9 +1,12 @@
-package com.example.bobpoole.werewolfclient;
+package com.example.bobpoole.werewolfclient.GameList;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ListView;
+
+import com.example.bobpoole.werewolfclient.R;
+import com.example.bobpoole.werewolfclient.WerewolfInterface;
+import com.example.bobpoole.werewolfclient.WerewolfService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,4 +1,4 @@
-package com.example.bobpoole.werewolfclient;
+package com.example.bobpoole.werewolfclient.LoginActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.bobpoole.werewolfclient.GameList.GameSelectionActivity;
+import com.example.bobpoole.werewolfclient.R;
+import com.example.bobpoole.werewolfclient.TokenHelper;
+import com.example.bobpoole.werewolfclient.WerewolfInterface;
+import com.example.bobpoole.werewolfclient.WerewolfService;
+
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
