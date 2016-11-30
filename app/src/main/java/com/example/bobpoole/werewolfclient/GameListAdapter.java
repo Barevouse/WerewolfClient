@@ -33,11 +33,11 @@ public class GameListAdapter extends ArrayAdapter<String> {
         gameId.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                int position = (Integer) view.getTag();
-                String game = getItem(position);
+                TextView textView = (TextView) view.findViewById(R.id.game_Id);
 
                 Intent intent = new Intent(getContext().getApplicationContext(), GameActivity.class);
-                intent.putExtra("gameId", game);
+                String text = textView.getText().toString();
+                intent.putExtra("gameId", text);
                 getContext().startActivity(intent);
             }
         });
