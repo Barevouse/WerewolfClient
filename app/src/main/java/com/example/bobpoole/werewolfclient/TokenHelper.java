@@ -6,6 +6,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,26 +19,16 @@ public class TokenHelper {
     public static boolean IsTokenValid(SharedPreferences sharedPrefences) throws ParseException {
         SharedPreferences localStorage = sharedPrefences;
         String token = localStorage.getString("Token", "");
-        Date now = new Date();
+        Long expiry = localStorage.getLong("Expiry", 0);
+
+        Calendar now = Calendar.getInstance();
 
         if(token.isEmpty() ){
-            return true;
+            return false;
         }
 
-        int i = token.lastIndexOf('.');
-        String withoutSignature = token.substring(0, i+1);
-
-        SignedJWT signedJWT = null;
-
-        try {
-            signedJWT = SignedJWT.parse(withoutSignature);
-        } catch (ParseException e) {
-            return true;
-        }
-
-        JWTClaimsSet jwtClaimsSet = signedJWT.getJWTClaimsSet();
-
-        Date exp = jwtClaimsSet.getDateClaim("exp");
+        Calendar exp = Calendar.getInstance();
+        exp.setTimeInMillis(expiry * 1000L);
 
         if(exp.before(now)){
             return true;

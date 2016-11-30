@@ -9,23 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.bobpoole.werewolfclient.Models.LoginCall;
-import com.nimbusds.jwt.*;
-
 import java.io.IOException;
-import java.text.ParseException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     String API = "werewolv.es/";
     public static final String LOCAL_STORAGE = "WereStorage";
+    private static final String GRANT_TYPE = "password";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +57,9 @@ public class LoginActivity extends AppCompatActivity {
 
         WerewolfService service = new WerewolfService();
         WerewolfInterface wereInterface = service.CreateWerewolfService();
-        LoginCall body = new LoginCall(emailAddress, password);
 
-        Call<LoginDetails> call = wereInterface.login(body);
+        Call<LoginDetails> call = wereInterface.login(emailAddress, password, GRANT_TYPE);
 
-        final LoginDetails[] loginDetails = new LoginDetails[1];
         call.enqueue(new Callback<LoginDetails>() {
             @Override
             public void onResponse(Call<LoginDetails> call, Response<LoginDetails> response) {
@@ -91,7 +87,15 @@ public class LoginActivity extends AppCompatActivity {
     private void onLoginSuccess(LoginDetails result) {
         SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, 0);
         SharedPreferences.Editor editor = localStorage.edit();
-        editor.putString("Token", result.Token);
+        int secs = Integer.parseInt(result.expires_in);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, secs);
+
+        long expiry = calendar.getTimeInMillis() / 1000L;
+
+        editor.putString("Token", result.access_token);
+        editor.putLong("Expiry", expiry);
         editor.commit();
         Intent intent = new Intent(getApplicationContext(), GameSelectionActivity.class);
         startActivity(intent);

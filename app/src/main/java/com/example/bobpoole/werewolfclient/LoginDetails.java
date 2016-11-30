@@ -4,14 +4,16 @@ package com.example.bobpoole.werewolfclient;
  * Created by Bob.Poole on 27/11/2016.
  */
 public class LoginDetails {
-    String Token;
-    private String token;
+    String access_token;
+    String expires_in;
 
-    public LoginDetails(String token){
-        Token = token;
+    public LoginDetails(String token, String expiresIn){
+
+        access_token = token;
+        expires_in = expiresIn;
     }
 
     public String getToken() {
-        return token;
+        return access_token;
     }
 }
