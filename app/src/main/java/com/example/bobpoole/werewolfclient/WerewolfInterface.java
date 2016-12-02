@@ -1,12 +1,11 @@
 package com.example.bobpoole.werewolfclient;
 
 import com.example.bobpoole.werewolfclient.GameList.GameList;
-import com.example.bobpoole.werewolfclient.GameList.LoginCall;
+import com.example.bobpoole.werewolfclient.LoginActivity.LoginCall;
 import com.example.bobpoole.werewolfclient.LoginActivity.LoginDetails;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 

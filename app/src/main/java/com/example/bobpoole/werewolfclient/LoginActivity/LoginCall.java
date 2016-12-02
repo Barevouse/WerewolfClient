@@ -1,4 +1,4 @@
-package com.example.bobpoole.werewolfclient.GameList;
+package com.example.bobpoole.werewolfclient.LoginActivity;
 
 /**
  * Created by Bob.Poole on 01/12/2016.

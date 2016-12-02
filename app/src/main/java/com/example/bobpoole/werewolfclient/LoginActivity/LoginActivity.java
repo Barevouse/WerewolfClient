@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bobpoole.werewolfclient.GameList.GameSelectionActivity;
-import com.example.bobpoole.werewolfclient.GameList.LoginCall;
 import com.example.bobpoole.werewolfclient.R;
 import com.example.bobpoole.werewolfclient.TokenHelper;
 import com.example.bobpoole.werewolfclient.WerewolfInterface;

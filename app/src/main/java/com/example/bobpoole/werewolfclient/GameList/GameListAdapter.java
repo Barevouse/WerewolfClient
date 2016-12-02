@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.bobpoole.werewolfclient.MainGame.GameActivity;
@@ -33,7 +34,9 @@ public class GameListAdapter extends ArrayAdapter<String> {
 
         gameId.setText(game);
 
-        gameId.setOnClickListener(new View.OnClickListener(){
+        RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.gameListEntry);
+
+        relativeLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 TextView textView = (TextView) view.findViewById(R.id.game_Id);

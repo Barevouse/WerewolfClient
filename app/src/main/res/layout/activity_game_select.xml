@@ -4,14 +4,35 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linearLayoutGameList">
-        <ListView
+
+    <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Active Games"
+            android:id="@+id/activeTitle"
+            android:textSize="30dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/activeGameList"
             android:textAlignment="center" />
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pending Games"
+            android:id="@+id/pendingTitle"
+            android:textSize="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/pendingGameList"
             android:textAlignment="center" />
 </LinearLayout>

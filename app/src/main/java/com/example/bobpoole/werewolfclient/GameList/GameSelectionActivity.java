@@ -49,10 +49,15 @@ public class GameSelectionActivity extends AppCompatActivity {
     }
 
     private void onGamesSuccess(GameList gameList) {
-        GameListAdapter gamelistAdapter = new GameListAdapter(this, gameList.getActive());
+        GameListAdapter activeGameListAdapter = new GameListAdapter(this, gameList.getActive());
 
         ListView activeGameList = (ListView) findViewById(R.id.activeGameList);
-        activeGameList.setAdapter(gamelistAdapter);
+        activeGameList.setAdapter(activeGameListAdapter);
+
+        GameListAdapter pendingGameListAdapter = new GameListAdapter(this, gameList.getPending());
+
+        ListView pendingGameList = (ListView) findViewById(R.id.pendingGameList);
+        pendingGameList.setAdapter(pendingGameListAdapter);
     }
 
 }
