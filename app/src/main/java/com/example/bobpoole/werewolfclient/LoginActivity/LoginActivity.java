@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bobpoole.werewolfclient.GameList.GameSelectionActivity;
+import com.example.bobpoole.werewolfclient.GameList.LoginCall;
 import com.example.bobpoole.werewolfclient.R;
 import com.example.bobpoole.werewolfclient.TokenHelper;
 import com.example.bobpoole.werewolfclient.WerewolfInterface;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         WerewolfService service = new WerewolfService();
         WerewolfInterface wereInterface = service.CreateWerewolfService();
 
-        Call<LoginDetails> call = wereInterface.login(emailAddress, password, GRANT_TYPE);
+        Call<LoginDetails> call = wereInterface.login(new LoginCall(emailAddress, password));
 
         call.enqueue(new Callback<LoginDetails>() {
             @Override
@@ -84,25 +85,32 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkToken() throws Exception {
         if (TokenHelper.IsTokenValid(getSharedPreferences(LOCAL_STORAGE, 0))) return;
-        Intent intent = new Intent(getApplicationContext(), GameSelectionActivity.class);
-        startActivity(intent);
+
+        launchActivity();
     }
 
     private void onLoginSuccess(LoginDetails result) {
         SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, 0);
         SharedPreferences.Editor editor = localStorage.edit();
-        int secs = Integer.parseInt(result.expires_in);
+        int secs = Integer.parseInt(result.expiresIn);
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, secs);
 
         long expiry = calendar.getTimeInMillis() / 1000L;
 
-        editor.putString("Token", result.access_token);
+        editor.putString("Token", result.accessToken);
         editor.putLong("Expiry", expiry);
         editor.commit();
+        launchActivity();
+
+    }
+
+    private void launchActivity(){
         Intent intent = new Intent(getApplicationContext(), GameSelectionActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 }
