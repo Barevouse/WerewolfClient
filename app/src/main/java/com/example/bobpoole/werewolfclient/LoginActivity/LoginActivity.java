@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String GRANT_TYPE = "password";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button btn = (Button) findViewById(R.id.loginButton);
@@ -83,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkToken() throws Exception {
-        if (TokenHelper.IsTokenValid(getSharedPreferences(LOCAL_STORAGE, 0))) return;
+        if (!TokenHelper.IsTokenValid(getSharedPreferences(LOCAL_STORAGE, 0))){
+                return;
+        }
 
         launchActivity();
     }

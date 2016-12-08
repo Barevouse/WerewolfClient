@@ -23,7 +23,7 @@ public class TokenHelper {
 
         Calendar now = Calendar.getInstance();
 
-        if(token.isEmpty() ){
+        if(token.isEmpty() || token == "" ){
             return false;
         }
 
@@ -31,8 +31,8 @@ public class TokenHelper {
         exp.setTimeInMillis(expiry * 1000L);
 
         if(exp.before(now)){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
