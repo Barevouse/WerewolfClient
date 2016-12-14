@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login() throws IOException {
 
-        final TextView error = (TextView) findViewById(R.id.error);
+
         EditText editTextEmail= (EditText)  findViewById(R.id.emailAddress);
         String emailAddress = editTextEmail.getText().toString();
         TextView editTextPassword = (TextView)  findViewById(R.id.password);
@@ -71,15 +71,20 @@ public class LoginActivity extends AppCompatActivity {
                 onLoginSuccess(response.body());
                 }
                 else{
-                    error.setVisibility(View.VISIBLE);
+                    ShowError();
                 }
             }
             @Override
             public void onFailure(Call<LoginDetails> call, Throwable t) {
-
+                ShowError();
             }
         });
 
+    }
+
+    public void ShowError() {
+        final TextView error = (TextView) findViewById(R.id.error);
+        error.setVisibility(View.VISIBLE);
     }
 
     private void checkToken() throws Exception {
@@ -90,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         launchActivity();
     }
 
-    private void onLoginSuccess(LoginDetails result) {
+    public void onLoginSuccess(LoginDetails result) {
         SharedPreferences localStorage = getSharedPreferences(LOCAL_STORAGE, 0);
         SharedPreferences.Editor editor = localStorage.edit();
         int secs = Integer.parseInt(result.expiresIn);
